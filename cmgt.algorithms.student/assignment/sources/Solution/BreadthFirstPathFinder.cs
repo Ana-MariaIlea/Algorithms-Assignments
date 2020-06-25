@@ -8,28 +8,64 @@ using System.Collections.Generic;
  */
 class BreadthFirstPathFinder : PathFinder
 {
-
-	public BreadthFirstPathFinder(NodeGraph pGraph) : base(pGraph) { }
-
+	List<Node> nodesToCheck;
+	List<Node> nodesAreChecked;
+	List<Node> finalPath;
+	Dictionary<Node, Node> childParent;
+	Node currentNode;
+	public BreadthFirstPathFinder(NodeGraph pGraph) : base(pGraph) 
+	{
+		nodesToCheck = new List<Node>();
+		nodesAreChecked = new List<Node>();
+		finalPath = new List<Node>();
+		childParent = new Dictionary<Node, Node>();
+	}
 	protected override List<Node> generate(Node pFrom, Node pTo)
 	{
-		//at this point you know the FROM and TO node and you have to write an 
-		//algorithm which finds the path between them
-		Console.WriteLine("For now I'll just roll a die for a random path!!");
+		nodesToCheck.Clear();
+		nodesAreChecked.Clear();
+		childParent.Clear();
+		finalPath.Clear();
+		nodesToCheck.Add(pFrom);
+		return BFSPathFinding( pFrom, pTo);
+	}
 
-		int dieRoll = Utils.Random(1, 7);
-		Console.WriteLine("I rolled a ..." + dieRoll);
+	List<Node> BFSPathFinding(Node startNode,Node endNode)
+	{
+		while(nodesToCheck.Count!=0)
+		{
+			currentNode = nodesToCheck[0];
+			nodesToCheck.Remove(currentNode);
+			nodesAreChecked.Add(currentNode);
+			if (currentNode != endNode)
+			{
+				foreach(Node connection in currentNode.connections)
+				{
+					if (!nodesToCheck.Contains(connection)&&!nodesAreChecked.Contains(connection))
+					{
+						nodesToCheck.Add(connection);
+						childParent.Add(connection, currentNode);
+					}
+				}
+			}
+			else
+			{
+				finalPath.Add(currentNode);
+				while (currentNode != startNode)
+				{
+					//if (childParent.ContainsKey(currentNode))
+					//{
+						finalPath.Add(childParent[currentNode]);
+						currentNode = childParent[currentNode];
+					//}
+				}
+				Console.WriteLine(finalPath.Count);
+				finalPath.Reverse();
+				return finalPath;
+			}
+		}
 
-		if (dieRoll == 6)
-		{
-			Console.WriteLine("Yes 'random' path found!!");
-			return new List<Node>() { pFrom, pTo };
-		}
-		else
-		{
-			Console.WriteLine("Too bad, no path found !!");
-			return null;
-		}
+		return null;
 	}
 
 }

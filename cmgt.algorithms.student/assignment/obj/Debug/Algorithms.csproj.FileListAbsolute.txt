@@ -12,3 +12,10 @@ D:\school\term_4\Algorithems\assignment\cmgt.algorithms.student\assignment\obj\D
 D:\school\term_4\Algorithems\assignment\cmgt.algorithms.student\assignment\obj\Debug\Algorithms.csproj.CoreCompileInputs.cache
 D:\school\term_4\Algorithems\assignment\cmgt.algorithms.student\assignment\obj\Debug\dcg.exe
 D:\school\term_4\Algorithems\assignment\cmgt.algorithms.student\assignment\obj\Debug\dcg.pdb
+D:\school\term_4\Algorithems\gitHubAlgorithms\Algorithms-Assignments\cmgt.algorithms.student\assignment\bin\Debug\dcg.exe.config
+D:\school\term_4\Algorithems\gitHubAlgorithms\Algorithms-Assignments\cmgt.algorithms.student\assignment\bin\Debug\dcg.exe
+D:\school\term_4\Algorithems\gitHubAlgorithms\Algorithms-Assignments\cmgt.algorithms.student\assignment\bin\Debug\dcg.pdb
+D:\school\term_4\Algorithems\gitHubAlgorithms\Algorithms-Assignments\cmgt.algorithms.student\assignment\obj\Debug\Algorithms.csprojAssemblyReference.cache
+D:\school\term_4\Algorithems\gitHubAlgorithms\Algorithms-Assignments\cmgt.algorithms.student\assignment\obj\Debug\Algorithms.csproj.CoreCompileInputs.cache
+D:\school\term_4\Algorithems\gitHubAlgorithms\Algorithms-Assignments\cmgt.algorithms.student\assignment\obj\Debug\dcg.exe
+D:\school\term_4\Algorithems\gitHubAlgorithms\Algorithms-Assignments\cmgt.algorithms.student\assignment\obj\Debug\dcg.pdb

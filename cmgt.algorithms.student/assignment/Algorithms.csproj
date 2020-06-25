@@ -149,6 +149,7 @@
     <Compile Include="sources\Solution\GoodDungeon.cs" />
     <Compile Include="sources\Solution\HighLevelDungeonNodeGraph.cs" />
     <Compile Include="sources\Solution\OffGraphWayPointAgent.cs" />
+    <Compile Include="sources\Solution\PathFindingAgent.cs" />
     <Compile Include="sources\Solution\RecursivePathFinder.cs" />
     <Compile Include="sources\Solution\SufficientDungen.cs" />
     <Compile Include="sources\Util\Grid.cs" />
