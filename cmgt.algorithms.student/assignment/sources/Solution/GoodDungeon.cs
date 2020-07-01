@@ -11,18 +11,26 @@ class GoodDungeon : SufficientDungen
     private int minArea;
     private int maxArea;
     private Dictionary<Room, int> roomArea;
+    private Pen wallPen = new Pen(Color.FromArgb(128, Color.Black));
+    private Pen doorPen = Pens.White;
+    List<Room> roomsWithOneDoor;
+    List<Room> roomsWithNoDoor;
+    List<Room> roomsWithTwoDoors;
+    List<Room> roomsWithMoreDoors;
     public GoodDungeon(Size pSize) : base(pSize)
     {
         roomArea = new Dictionary<Room, int>();
+        roomsWithNoDoor = new List<Room>();
+        roomsWithOneDoor = new List<Room>();
+        roomsWithTwoDoors = new List<Room>();
+        roomsWithMoreDoors = new List<Room>();
     }
 
     protected override void generate(int pMinimumRoomSize)
     {
         maxArea = pMinimumRoomSize * pMinimumRoomSize;
         minArea = size.Width * size.Height;
-        //
-        // base.generate(pMinimumRoomSize);
-        //
+
         makeRoom(new Room(new Rectangle(0, 0, size.Width, size.Height)), pMinimumRoomSize);
         foreach (Room room in rooms)
         {
@@ -33,8 +41,19 @@ class GoodDungeon : SufficientDungen
         }
         removeRooms();
         MakeDoors();
-        draw();
         paintRooms();
+        draw();
+        
+    }
+
+    protected override void draw()
+    {
+        graphics.Clear(Color.Transparent);
+        drawRooms(roomsWithNoDoor, wallPen,Brushes.Red);
+        drawRooms(roomsWithOneDoor, wallPen,Brushes.Orange);
+        drawRooms(roomsWithTwoDoors, wallPen, Brushes.Yellow);
+        drawRooms(roomsWithMoreDoors, wallPen, Brushes.Green);
+        drawDoors(doors, doorPen);
     }
     void removeRooms()
     {
@@ -60,15 +79,16 @@ class GoodDungeon : SufficientDungen
             switch (doorNumber)
             {
                 case 0:
-                    // Graphics.FillRectngle(new SolidBrush(Color.Blue), room.area);
+                    roomsWithNoDoor.Add(room);
                     break;
                 case 1:
+                    roomsWithOneDoor.Add(room);
                     break;
                 case 2:
+                    roomsWithTwoDoors.Add(room);
                     break;
-                case 3:
-                    break;
-                case 4:
+                default:
+                    roomsWithMoreDoors.Add(room);
                     break;
             }
         }
