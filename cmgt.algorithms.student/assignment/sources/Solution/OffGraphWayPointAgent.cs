@@ -11,10 +11,10 @@ using GXPEngine;
 class OffGraphWayPointAgent : NodeGraphAgent
 {
     //Current target to move towards
-    private Node _target = null;
-    private List<Node> nodeQueue;
-    private Node currentNode;
-    private int numberOfNods=1;
+    protected Node _target = null;
+    protected List<Node> nodeQueue;
+    protected Node currentNode;
+    protected int numberOfNods=1;
 
     public OffGraphWayPointAgent(NodeGraph pNodeGraph) : base(pNodeGraph)
     {

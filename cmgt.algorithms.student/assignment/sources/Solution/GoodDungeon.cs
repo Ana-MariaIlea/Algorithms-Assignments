@@ -42,7 +42,7 @@ class GoodDungeon : SufficientDungen
         removeRooms();
         MakeDoors();
         paintRooms();
-        draw();
+        //draw();
         
     }
 
@@ -57,10 +57,11 @@ class GoodDungeon : SufficientDungen
     }
     void removeRooms()
     {
-        for(int i=0;i<rooms.Count();i++)
+        for(int i=0;i<rooms.Count;i++)
         {
-            int area = rooms[i].area.Width * rooms[i].area.Height;
-            if (area == minArea || area == maxArea) rooms.Remove(rooms[i]);
+            //int area = rooms[i].area.Width * rooms[i].area.Height;
+            //if (area == minArea || area == maxArea) rooms.Remove(rooms[i]);
+            if (roomArea[rooms[i]] == minArea || roomArea[rooms[i]] == maxArea) rooms.Remove(rooms[i]);
         }
     }
 
@@ -75,19 +76,24 @@ class GoodDungeon : SufficientDungen
                 {
                     doorNumber++;
                 }
+                else continue;
             }
             switch (doorNumber)
             {
                 case 0:
                     roomsWithNoDoor.Add(room);
+                    drawRoom(room, wallPen, Brushes.Red);
                     break;
                 case 1:
+                    drawRoom(room, wallPen, Brushes.Orange);
                     roomsWithOneDoor.Add(room);
                     break;
                 case 2:
+                    drawRoom(room, wallPen, Brushes.Yellow);
                     roomsWithTwoDoors.Add(room);
                     break;
                 default:
+                    drawRoom(room, wallPen, Brushes.Green);
                     roomsWithMoreDoors.Add(room);
                     break;
             }

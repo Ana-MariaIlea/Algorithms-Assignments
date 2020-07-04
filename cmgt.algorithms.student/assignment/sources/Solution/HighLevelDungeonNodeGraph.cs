@@ -11,12 +11,14 @@ using GXPEngine;
 class HighLevelDungeonNodeGraph : NodeGraph
 {
     protected Dungeon _dungeon;
+    protected Dictionary<Point, Node> nodeLocation;
 
     public HighLevelDungeonNodeGraph(Dungeon pDungeon) : base((int)(pDungeon.size.Width * pDungeon.scale), (int)(pDungeon.size.Height * pDungeon.scale), (int)pDungeon.scale / 3)
     {
         Debug.Assert(pDungeon != null, "Please pass in a dungeon.");
 
         _dungeon = pDungeon;
+        nodeLocation = new Dictionary<Point, Node>();
     }
 
     protected override void generate()
@@ -26,24 +28,31 @@ class HighLevelDungeonNodeGraph : NodeGraph
         {
             Node roomNode = new Node(getRoomCenter(_dungeon.rooms[i]));
             nodes.Add(roomNode);
+            nodeLocation.Add(roomNode.location, roomNode);
             for (int j = 0; j < _dungeon.doors.Count(); j++)
             {
                 if (_dungeon.doors[j].roomA ==_dungeon.rooms[i] || _dungeon.doors[j].roomB == _dungeon.rooms[i])
                 {
                     Node doorNode;
                     doorNode = new Node(getDoorCenter(_dungeon.doors[j]));
-                    int k;
-                    for (k = 0; k < nodes.Count(); k++)
+                    //int k;
+                    //for (k = 0; k < nodes.Count(); k++)
+                    //{
+                    //    if (nodes[k].location == doorNode.location)
+                    //    {
+                    //        doorNode = nodes[k];
+                    //        break;
+                    //    }
+                    //}
+                    //if (k >= nodes.Count())
+                    if(nodeLocation.ContainsKey(doorNode.location))
                     {
-                        if (nodes[k].location == doorNode.location)
-                        {
-                            doorNode = nodes[k];
-                            break;
-                        }
+                        doorNode = nodeLocation[doorNode.location];
                     }
-                    if (k >= nodes.Count())
+                    else
                     {
                         nodes.Add(doorNode);
+                        nodeLocation.Add(doorNode.location, doorNode);
                     }
                     AddConnection(roomNode, doorNode);
 

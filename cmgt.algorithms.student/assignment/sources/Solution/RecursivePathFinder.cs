@@ -34,19 +34,20 @@ class RecursivePathFinder : PathFinder
             visitedNodes.Add(pFrom);
             for (int i = 0; i < pFrom.connections.Count; i++)
             {
-                bool visited = false;
-                for (int j = 0; j < visitedNodes.Count; j++)
-                {
-                    if (pFrom.connections[i] == visitedNodes[j]) 
-                    {
-                       // Console.WriteLine("visited");
-                        visited = true; 
-                        break; 
-                    }
-                }
+                //bool visited = false;
+                //for (int j = 0; j < visitedNodes.Count; j++)
+                //{
+                //    if (pFrom.connections[i] == visitedNodes[j]) 
+                //    {
+                //       // Console.WriteLine("visited");
+                //        visited = true; 
+                //        break; 
+                //    }
+                //}
                 //Console.WriteLine(visited);
 
-                if (visited == false)
+                //if (visited == false)
+                if(!visitedNodes.Contains(pFrom.connections[i]))
                 {
                     pathRecursiveGenerator(pFrom.connections[i], pTo, deapth++);
                     visitedNodes.Remove(pFrom.connections[i]);

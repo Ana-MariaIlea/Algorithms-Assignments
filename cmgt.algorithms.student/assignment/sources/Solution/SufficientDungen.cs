@@ -63,7 +63,7 @@ class SufficientDungen : Dungeon
                     overlap = Rectangle.Intersect(rooms[i].area, rooms[j].area);
                     if (overlap.Width > overlap.Height)
                     {
-                        if (overlap.Width > 3 && overlap.Height >= 1)
+                        if (overlap.Width >= 3 && overlap.Height >= 1)
                         {
                             Door door = new Door(new Point(overlap.X + overlap.Width / 2 + Utils.Random(-overlap.Width / 2 + 1, overlap.Width / 2 - 1), overlap.Y));
                             doors.Add(door);
@@ -74,7 +74,7 @@ class SufficientDungen : Dungeon
                     }
                     else
                     {
-                        if (overlap.Height > 3 && overlap.Width >= 1)
+                        if (overlap.Height >= 3 && overlap.Width >= 1)
                         {
                             Door door = new Door(new Point(overlap.X, overlap.Y + overlap.Height / 2 + Utils.Random(-overlap.Height / 2 + 1, overlap.Height / 2 - 1)));
                             doors.Add(door);
