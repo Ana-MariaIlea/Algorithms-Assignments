@@ -50,7 +50,8 @@ class RecursivePathFinder : PathFinder
                 if(!visitedNodes.Contains(pFrom.connections[i]))
                 {
                     pathRecursiveGenerator(pFrom.connections[i], pTo, deapth++);
-                    visitedNodes.Remove(pFrom.connections[i]);
+                    visitedNodes.RemoveAt(visitedNodes.Count - 1);
+                    //visitedNodes.Remove(pFrom.connections[i]);
                 }
             }
         }
