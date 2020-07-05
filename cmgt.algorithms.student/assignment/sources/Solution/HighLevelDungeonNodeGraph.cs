@@ -35,16 +35,6 @@ class HighLevelDungeonNodeGraph : NodeGraph
                 {
                     Node doorNode;
                     doorNode = new Node(getDoorCenter(_dungeon.doors[j]));
-                    //int k;
-                    //for (k = 0; k < nodes.Count(); k++)
-                    //{
-                    //    if (nodes[k].location == doorNode.location)
-                    //    {
-                    //        doorNode = nodes[k];
-                    //        break;
-                    //    }
-                    //}
-                    //if (k >= nodes.Count())
                     if(nodeLocation.ContainsKey(doorNode.location))
                     {
                         doorNode = nodeLocation[doorNode.location];

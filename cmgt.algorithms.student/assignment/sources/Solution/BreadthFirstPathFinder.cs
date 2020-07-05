@@ -8,64 +8,61 @@ using System.Collections.Generic;
  */
 class BreadthFirstPathFinder : PathFinder
 {
-	List<Node> nodesToCheck;
-	List<Node> nodesAreChecked;
-	List<Node> finalPath;
-	Dictionary<Node, Node> childParent;
-	Node currentNode;
-	public BreadthFirstPathFinder(NodeGraph pGraph) : base(pGraph) 
-	{
-		nodesToCheck = new List<Node>();
-		nodesAreChecked = new List<Node>();
-		finalPath = new List<Node>();
-		childParent = new Dictionary<Node, Node>();
-	}
-	protected override List<Node> generate(Node pFrom, Node pTo)
-	{
-		nodesToCheck.Clear();
-		nodesAreChecked.Clear();
-		childParent.Clear();
-		finalPath.Clear();
-		nodesToCheck.Add(pFrom);
-		return BFSPathFinding( pFrom, pTo);
-	}
+    List<Node> nodesToCheck;
+    List<Node> nodesAreChecked;
+    List<Node> finalPath;
+    Dictionary<Node, Node> childParent;
+    Node currentNode;
+    public BreadthFirstPathFinder(NodeGraph pGraph) : base(pGraph)
+    {
+        nodesToCheck = new List<Node>();
+        nodesAreChecked = new List<Node>();
+        finalPath = new List<Node>();
+        childParent = new Dictionary<Node, Node>();
+    }
+    protected override List<Node> generate(Node pFrom, Node pTo)
+    {
+        nodesToCheck.Clear();
+        nodesAreChecked.Clear();
+        childParent.Clear();
+        finalPath.Clear();
+        nodesToCheck.Add(pFrom);
+        return BFSPathFinding(pFrom, pTo);
+    }
 
-	List<Node> BFSPathFinding(Node startNode,Node endNode)
-	{
-		while(nodesToCheck.Count!=0)
-		{
-			currentNode = nodesToCheck[0];
-			nodesToCheck.Remove(currentNode);
-			nodesAreChecked.Add(currentNode);
-			if (currentNode != endNode)
-			{
-				foreach(Node connection in currentNode.connections)
-				{
-					if (!nodesToCheck.Contains(connection)&&!nodesAreChecked.Contains(connection))
-					{
-						nodesToCheck.Add(connection);
-						childParent.Add(connection, currentNode);
-					}
-				}
-			}
-			else
-			{
-				finalPath.Add(currentNode);
-				while (currentNode != startNode)
-				{
-					//if (childParent.ContainsKey(currentNode))
-					//{
-						finalPath.Add(childParent[currentNode]);
-						currentNode = childParent[currentNode];
-					//}
-				}
-				Console.WriteLine(finalPath.Count);
-				finalPath.Reverse();
-				return finalPath;
-			}
-		}
+    List<Node> BFSPathFinding(Node startNode, Node endNode)
+    {
+        while (nodesToCheck.Count != 0)
+        {
+            currentNode = nodesToCheck[0];
+            nodesToCheck.Remove(currentNode);
+            nodesAreChecked.Add(currentNode);
+            if (currentNode != endNode)
+            {
+                foreach (Node connection in currentNode.connections)
+                {
+                    if (!nodesToCheck.Contains(connection) && !nodesAreChecked.Contains(connection))
+                    {
+                        nodesToCheck.Add(connection);
+                        childParent.Add(connection, currentNode);
+                    }
+                }
+            }
+            else
+            {
+                finalPath.Add(currentNode);
+                while (currentNode != startNode)
+                {
 
-		return null;
-	}
+                    finalPath.Add(childParent[currentNode]);
+                    currentNode = childParent[currentNode];
+                }
+                finalPath.Reverse();
+                return finalPath;
+            }
+        }
+
+        return null;
+    }
 
 }

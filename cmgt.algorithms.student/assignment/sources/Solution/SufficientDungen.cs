@@ -18,6 +18,8 @@ class SufficientDungen : Dungeon
     {
         if (currentRoom.area.Width > currentRoom.area.Height)
         {
+            // Split room with vertical wall
+
             if (currentRoom.area.Width >= minSize * 2 && currentRoom.area.Height >= minSize)
             {
                 int split = Utils.Random(minSize, currentRoom.area.Width - minSize);
@@ -35,6 +37,8 @@ class SufficientDungen : Dungeon
         }
         else
         {
+            // Split room with horrizontal wall
+
             if (currentRoom.area.Width >= minSize && currentRoom.area.Height >= minSize * 2)
             {
                 int split = Utils.Random(minSize, currentRoom.area.Height - minSize);
@@ -63,6 +67,8 @@ class SufficientDungen : Dungeon
                     overlap = Rectangle.Intersect(rooms[i].area, rooms[j].area);
                     if (overlap.Width > overlap.Height)
                     {
+                        // Make door on horizontal wall
+
                         if (overlap.Width >= 3 && overlap.Height >= 1)
                         {
                             Door door = new Door(new Point(overlap.X + overlap.Width / 2 + Utils.Random(-overlap.Width / 2 + 1, overlap.Width / 2 - 1), overlap.Y));
@@ -74,6 +80,8 @@ class SufficientDungen : Dungeon
                     }
                     else
                     {
+                        // Make door on vertical wall
+
                         if (overlap.Height >= 3 && overlap.Width >= 1)
                         {
                             Door door = new Door(new Point(overlap.X, overlap.Y + overlap.Height / 2 + Utils.Random(-overlap.Height / 2 + 1, overlap.Height / 2 - 1)));

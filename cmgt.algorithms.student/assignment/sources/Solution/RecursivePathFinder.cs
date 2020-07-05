@@ -20,61 +20,45 @@ class RecursivePathFinder : PathFinder
     {
         shortsetPath.Clear();
         visitedNodes.Clear();
-        pathRecursiveGenerator(pFrom, pTo, 0);
+        pathRecursiveGenerator(pFrom, pTo);
         return shortsetPath;
     }
 
-    void pathRecursiveGenerator(Node pFrom, Node pTo, int deapth)
+    void pathRecursiveGenerator(Node pFrom, Node pTo)
     {
-        Console.WriteLine(shortsetPath.Count);
-
         if (pFrom != pTo)
         {
-           // Console.WriteLine("continue");
             visitedNodes.Add(pFrom);
             for (int i = 0; i < pFrom.connections.Count; i++)
             {
-                //bool visited = false;
-                //for (int j = 0; j < visitedNodes.Count; j++)
-                //{
-                //    if (pFrom.connections[i] == visitedNodes[j]) 
-                //    {
-                //       // Console.WriteLine("visited");
-                //        visited = true; 
-                //        break; 
-                //    }
-                //}
-                //Console.WriteLine(visited);
-
-                //if (visited == false)
                 if(!visitedNodes.Contains(pFrom.connections[i]))
                 {
-                    pathRecursiveGenerator(pFrom.connections[i], pTo, deapth++);
+                    pathRecursiveGenerator(pFrom.connections[i], pTo);
                     visitedNodes.RemoveAt(visitedNodes.Count - 1);
-                    //visitedNodes.Remove(pFrom.connections[i]);
                 }
             }
         }
         else
-        {
+        { // Found a path
             visitedNodes.Add(pTo);
             if (shortsetPath.Count == 0)
-            {
-                //Console.WriteLine("make path");
-                for (int i = 0; i < visitedNodes.Count; i++)
-                {
-                    shortsetPath.Add(visitedNodes[i]);
-                }
+            { // There isn't a path yet
+                shortsetPath = new List<Node>(visitedNodes);
+                //for (int i = 0; i < visitedNodes.Count; i++)
+                //{
+                //    shortsetPath.Add(visitedNodes[i]);
+                //}
             }
             else
-            {
+            { // There is a path
                 if (visitedNodes.Count < shortsetPath.Count)
-                {
+                { // If the new path is shorter
                     shortsetPath.Clear();
-                    for (int i = 0; i < visitedNodes.Count; i++)
-                    {
-                        shortsetPath.Add(visitedNodes[i]);
-                    }
+                    shortsetPath = new List<Node>(visitedNodes);
+                    //for (int i = 0; i < visitedNodes.Count; i++)
+                    //{
+                    //    shortsetPath.Add(visitedNodes[i]);
+                    //}
                 }
             }
 

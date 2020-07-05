@@ -13,17 +13,10 @@ class GoodDungeon : SufficientDungen
     private Dictionary<Room, int> roomArea;
     private Pen wallPen = new Pen(Color.FromArgb(128, Color.Black));
     private Pen doorPen = Pens.White;
-    List<Room> roomsWithOneDoor;
-    List<Room> roomsWithNoDoor;
-    List<Room> roomsWithTwoDoors;
-    List<Room> roomsWithMoreDoors;
+
     public GoodDungeon(Size pSize) : base(pSize)
     {
         roomArea = new Dictionary<Room, int>();
-        roomsWithNoDoor = new List<Room>();
-        roomsWithOneDoor = new List<Room>();
-        roomsWithTwoDoors = new List<Room>();
-        roomsWithMoreDoors = new List<Room>();
     }
 
     protected override void generate(int pMinimumRoomSize)
@@ -41,36 +34,29 @@ class GoodDungeon : SufficientDungen
         }
         removeRooms();
         MakeDoors();
-        paintRooms();
-        //draw();
-        
+        draw();
     }
 
     protected override void draw()
     {
         graphics.Clear(Color.Transparent);
-        drawRooms(roomsWithNoDoor, wallPen,Brushes.Red);
-        drawRooms(roomsWithOneDoor, wallPen,Brushes.Orange);
-        drawRooms(roomsWithTwoDoors, wallPen, Brushes.Yellow);
-        drawRooms(roomsWithMoreDoors, wallPen, Brushes.Green);
+        paintRooms();
         drawDoors(doors, doorPen);
     }
     void removeRooms()
     {
-        for(int i=0;i<rooms.Count;i++)
+        for (int i = 0; i < rooms.Count; i++)
         {
-            //int area = rooms[i].area.Width * rooms[i].area.Height;
-            //if (area == minArea || area == maxArea) rooms.Remove(rooms[i]);
             if (roomArea[rooms[i]] == minArea || roomArea[rooms[i]] == maxArea) rooms.Remove(rooms[i]);
         }
     }
 
     void paintRooms()
     {
-        foreach(Room room in rooms)
+        foreach (Room room in rooms)
         {
             int doorNumber = 0;
-            foreach(Door door in doors)
+            foreach (Door door in doors)
             {
                 if (door.roomA == room || door.roomB == room)
                 {
@@ -81,20 +67,16 @@ class GoodDungeon : SufficientDungen
             switch (doorNumber)
             {
                 case 0:
-                    roomsWithNoDoor.Add(room);
                     drawRoom(room, wallPen, Brushes.Red);
                     break;
                 case 1:
                     drawRoom(room, wallPen, Brushes.Orange);
-                    roomsWithOneDoor.Add(room);
                     break;
                 case 2:
                     drawRoom(room, wallPen, Brushes.Yellow);
-                    roomsWithTwoDoors.Add(room);
                     break;
                 default:
                     drawRoom(room, wallPen, Brushes.Green);
-                    roomsWithMoreDoors.Add(room);
                     break;
             }
         }

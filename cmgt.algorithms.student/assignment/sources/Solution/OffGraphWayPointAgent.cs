@@ -54,7 +54,6 @@ class OffGraphWayPointAgent : NodeGraphAgent
     {
         //no target? Don't walk
         if (_target == null) return;
-       // Console.WriteLine(nodeQueue.Count());
 
         //Move towards the target node, if we reached it, clear the target
         if (moveTowardsNode(_target))
